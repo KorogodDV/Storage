@@ -77,6 +77,19 @@ public:
 		}
 	}
 
+	T* get(int index)
+	{
+		assert(index >= 0 && index < this->length());
+		int i = 0;
+		Node<T>* pointer = head;
+		while (i != index)
+		{
+			pointer = pointer->next;
+			i++;
+		}
+		return &(pointer->value);
+	}
+
 	bool contains(T value)
 	{
 		bool res = false;
@@ -90,6 +103,29 @@ public:
 			pointer = pointer->next;
 		}
 		return res;
+	}
+
+	int findByValue(T value)
+	{
+		bool res = false;
+		int pos = 0;
+
+		Node<T>* pointer = head;
+		while (pointer != 0)
+		{
+			if (pointer->value == value)
+			{
+				res = true;
+				break;
+			}
+			pos++;
+			pointer = pointer->next;
+		}
+
+		if (res)
+			return pos;
+		else
+			return -1;
 	}
 
 	void erase()
@@ -225,7 +261,9 @@ int main()
 	//std::cout << a1.length();
 	a1 += a2;
 	a1.append(36);
-	std::cout << a1.removeByValue(36);
-	std::cout << a1.popFront();
-	std::cout << a1.popFront();
+	//std::cout << *a1.get(2);
+	std::cout << a1.findByValue(36);
+	//std::cout << a1.removeByValue(36);
+	//std::cout << a1.popFront();
+	//std::cout << a1.popFront();
 }
