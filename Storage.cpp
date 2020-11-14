@@ -242,7 +242,6 @@ class Storage
 		T* GetObject(std::string name)
 		{
 			assert(items_names.contains(name));
-			std::cout << items_names.findByValue(name);
 			return items.get(items_names.findByValue(name));
 		}
 
