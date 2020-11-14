@@ -136,6 +136,7 @@ public:
 		{
 			Node<T>* new_pointer = pointer->next;
 			delete[] pointer;
+			std::cout << "          " << 1233333333333331;
 			pointer = new_pointer;
 		}
 	}
@@ -212,15 +213,13 @@ class Storage
 		Storage()
 		{
 			items = List<T>();
-			items_names = List<T>();
+			items_names = List<std::string>();
 		}
 
 		~Storage()
 		{
 			items.erase();
-			delete[] items.head;
 			items_names.erase();
-			delete[] items_names.head;
 		}
 
 		void CreateObject(std::string name, T obj)
@@ -240,13 +239,12 @@ class Storage
 			items.removeByIndex(items_names.removeByValue(name));
 		}
 
-		/*T* GetObject(std::string name)
+		T* GetObject(std::string name)
 		{
 			assert(items_names.contains(name));
-			int index = items_names.removeByValue(name);
-			T obj = 
-			
-		}*/
+			std::cout << items_names.findByValue(name);
+			return items.get(items_names.findByValue(name));
+		}
 
 };
 
@@ -262,8 +260,12 @@ int main()
 	a1 += a2;
 	a1.append(36);
 	//std::cout << *a1.get(2);
-	std::cout << a1.findByValue(36);
+	//std::cout << a1.findByValue(36);
 	//std::cout << a1.removeByValue(36);
 	//std::cout << a1.popFront();
 	//std::cout << a1.popFront();
+	Storage<int> s;
+	s.CreateObject(std::string("cow"), 25);
+	int* a = s.GetObject(std::string("cow"));
+	return 0;
 }
