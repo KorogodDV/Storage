@@ -24,11 +24,19 @@ public:
 
 	List<T>(const List<T>& sample)
 	{
-		head = sample.head;
+		head = 0;
+		Node<T>* pointer = sample.head;
+		while (pointer != 0)
+		{
+			this->append(pointer->value);
+			pointer = pointer->next;
+		}
 	}
 
 	~List<T>()
-	{}
+	{
+		this->erase();
+	}
 
 	int length()
 	{
@@ -62,18 +70,11 @@ public:
 
 	void operator+=(List<T> l2)
 	{
-		if (head == 0)
+		Node<T>* pointer = l2.head;
+		while (pointer != 0)
 		{
-			head = l2.head;
-		}
-		else
-		{
-			Node<T>* pointer = head;
-			while (pointer->next != 0)
-			{
-				pointer = pointer->next;
-			}
-			pointer->next = l2.head;
+			this->append(pointer->value);
+			pointer = pointer->next;
 		}
 	}
 
@@ -250,14 +251,16 @@ class Storage
 
 int main()
 {
-	List<int> a1;
-	List<int> a2;
+	//List<int> a1;
+	//List<int> a2;
 	int b = 5;
-	a1.pushFront(b);
-	a2.pushFront(b*b);
+	//a1.pushFront(b);
+	//a2.pushFront(b*b);
+	//a2.append(b);
 	//std::cout << a1.length();
-	a1 += a2;
-	a1.append(36);
+	//std::cout << a2.length();
+	//a1 += a2;
+	//a1.append(36);
 	//std::cout << *a1.get(2);
 	//std::cout << a1.findByValue(36);
 	//std::cout << a1.removeByValue(36);
@@ -266,5 +269,6 @@ int main()
 	Storage<int> s;
 	s.CreateObject(std::string("cow"), 25);
 	int* a = s.GetObject(std::string("cow"));
+	std::cout << *a;
 	return 0;
 }
